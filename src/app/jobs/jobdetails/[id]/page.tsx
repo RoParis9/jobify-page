@@ -6,7 +6,9 @@ import Link from "next/link";
 import { ApplyButton } from "@/app/Components/Helper/ApplyButton";
 
 const jobDetails = async ({params}:{params:{id:string}}) => {
+
   const singleJob = JobData.find((job)=>job.id.toString()===params.id)
+
   const session = await getServerSession(authOptions)
   
   const firstForJobs =JobData.slice(0,4)
@@ -18,11 +20,6 @@ const jobDetails = async ({params}:{params:{id:string}}) => {
           <JobCard job={singleJob!} />
         </div>
         {session && <ApplyButton /> }
-        {!session && (
-          <Link href="/signup">
-            <button className="px-8 py-3 bg-emerald-600 rounded-lg text-white">Sign Up to Apply</button>
-          </Link>
-        )}
       </div>
       <div className="mt-16 w-[80%] mx-auto">
         <h2 className="text-[20px] font-semibold">Job Description</h2>
